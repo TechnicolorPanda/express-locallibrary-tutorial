@@ -11,4 +11,9 @@ router.get('/about', function (req, res) {
   res.send('About this wiki');
 })
 
+// GET home page.
+router.get('/', function(req, res) {
+  res.redirect('/catalog');
+});
+
 module.exports = router;
