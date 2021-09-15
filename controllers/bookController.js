@@ -180,7 +180,11 @@ exports.book_delete_get = function(req, res) {
         res.redirect('/catalog/books');
     }
     // Successful, so render.
-    res.render('book_delete', { title: 'Delete Book', book: results.book, book_instances: results.book_instances } );
+    res.render('book_delete', { 
+      title: 'Delete Book', 
+      book: results.book, 
+      book_instances: results.book_instances,
+    } );
   })
 };
 
@@ -197,7 +201,11 @@ exports.book_delete_post = function(req, res) {
         if (err) { return next(err); }
         // Success
         if (results.book_instances.length > 0) {
-            res.render('book_delete', { title: 'Delete Book', book: results.book, book_instances: results.book_instances } );
+            res.render('book_delete', { 
+              title: 'Delete Book', 
+              book: results.book, 
+              book_instances: results.book_instances 
+            } );
             return;
         }
         else {

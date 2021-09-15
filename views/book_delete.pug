@@ -10,7 +10,7 @@ block content
       h4 Copies
 
       dl
-      each bookInstance in book_instances
+      each book_instance in book_instances
         dt
           a(href=book_instance.url) #{book_instance.book}
         dd #{book_instance.imprint}
