@@ -1,7 +1,8 @@
 var BookInstance = require('../models/bookinstance');
+var Book = require('../models/book');
 var mongoose = require('mongoose');
 const { body,validationResult } = require('express-validator');
-var Book = require('../models/book');
+
 
 // Display list of all BookInstances.
 exports.bookinstance_list = function(req, res, next) {
@@ -93,35 +94,30 @@ exports.bookinstance_create_post = [
 ];
 
 // Display BookInstance delete form on GET.
-exports.bookinstance_delete_get = function(req, res) {
-  BookInstance.findById(req.params.id).exec(function(err, results)
-    {
-        if (err) { return next(err); }
-        if (results.bookinstance==null) { // No results.
-            res.redirect('/catalog/bookinstances');
-        }
-        // Successful, so render.
-        res.render('bookinstance_delete', { title: 'Delete Copy', book_instance: results});
+exports.bookinstance_delete_get = function (req, res, next) {
+  BookInstance.findById(req.params.id).exec((error, book_instance) => {
+    if (error) {
+      return next(error);
+    }
+    if (!book_instance) {
+      res.redirect('/catalog/books');
+    }
+    res.render('bookinstance_delete', {
+      title: 'Delete copy',
+      book_instance,
     });
+  });
 };
 
 // Handle BookInstance delete on POST.
-exports.bookinstance_delete_post = function(req, res) {
-  BookInstance.findById(req.params.id).exec(function(err, results) {
-    if(err){return next(err)}
-
-    if(results === null){
-     res.render('bookinstance_delete',  {title: 'Delete Copy', book_instance: results})
-     return ;
+exports.bookinstance_delete_post = function (req, res, next) {
+  BookInstance.findByIdAndRemove(req.body.book_instance_id, (err) => {
+    if (err) {
+      return next(err);
     }
-    else{
-     BookInstance.findByIdAndRemove(req.body.bookinstanceid, function deleteBookInstance(err){
-       if(err){return next(err)}
-
-       res.redirect('/catalog/bookinstances')
-    })
-    }
-})};
+    res.redirect('/catalog/bookinstances');
+  });
+};
 
 // Display BookInstance update form on GET.
 exports.bookinstance_update_get = function(req, res) {
