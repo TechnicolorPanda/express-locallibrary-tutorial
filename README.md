@@ -4,7 +4,7 @@
 
 A basic local library database using Express and NodeJS. This project was an assignment for [The Odin Project](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs/lessons/express-105-forms-and-deployment)'s NodeJS lesson. The lesson works through the Mozilla [Local Library Tutorial.](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutorial_local_library_website)
 
-See it live deployed on Heroku. 
+See it live deployed on [Heroku.](https://calm-peak-28491.herokuapp.com/)
 
 ## Objectives & Outcomes
 
